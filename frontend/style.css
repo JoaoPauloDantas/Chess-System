@@ -204,3 +204,20 @@ main {
     height: 18px;
     filter: invert(100%); /* Ajusta os ícones para ficarem claros no fundo escuro */
 }
+
+.tabuleiro {
+  width: 100%;
+  max-width: 480px; /* Limita o tamanho em telas grandes */
+  aspect-ratio: 1 / 1; /* Garante que sempre será um quadrado perfeito */
+  margin: 0 auto; /* Centraliza na tela */
+}
+
+.casa {
+  touch-action: manipulation;
+}
+
+.peca {
+  -webkit-user-select: none; /* Safari */
+  user-select: none;         /* Padrão */
+}
+
