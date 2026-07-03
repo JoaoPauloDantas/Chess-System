@@ -3,7 +3,7 @@ const restartButton = document.getElementById("restartButton");
 const moveHistoryContainer = document.getElementById("moveHistory");
 let contadorJogadas = 1;
 
-// JOguinho de xadrez, joãozinho 30 rei dos fontes
+// JOguinho de xadrez, joãozinho 30 rei dos fontes, aqui está o backend do jogo
 const pieces = [
     "♜","♞","♝","♛","♚","♝","♞","♜",
     "♟","♟","♟","♟","♟","♟","♟","♟",
