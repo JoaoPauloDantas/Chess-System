@@ -204,20 +204,103 @@ main {
     height: 18px;
     filter: invert(100%); /* Ajusta os ícones para ficarem claros no fundo escuro */
 }
-
-.tabuleiro {
-  width: 100%;
-  max-width: 480px; /* Limita o tamanho em telas grandes */
-  aspect-ratio: 1 / 1; /* Garante que sempre será um quadrado perfeito */
-  margin: 0 auto; /* Centraliza na tela */
+* {
+  box-sizing: border-box;
 }
 
+.tabuleiro {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  
+  /* O segredo da responsividade mobile: */
+  width: 90vw;            /* Ocupa 90% da largura da tela do celular */
+  height: 90vw;           /* Mantém a altura exatamente igual à largura */
+  max-width: 480px;       /* No computador, ele não passa desse tamanho */
+  max-height: 480px;      /* No computador, mantém o quadrado perfeito */
+  
+  margin: 20px auto;      /* Centraliza na tela e desgruda do topo/fim */
+  border: 4px solid #333; /* Borda opcional do tabuleiro */
+}
+
+/* Garante que as casas e as peças se adaptem perfeitamente */
 .casa {
-  touch-action: manipulation;
+  width: 100%;
+  height: 100%;
 }
 
 .peca {
-  -webkit-user-select: none; /* Safari */
-  user-select: none;         /* Padrão */
+  width: 100%;
+  height: 100%;
+  object-fit: contain;   /* Se for imagem, faz a peça caber na casa sem distorcer */
 }
 
+/* ==========================================
+   CONFIGURAÇÃO PARA CELULARES (TELAS MENORES)
+   ========================================== */
+@media (max-width: 768px) {
+  
+  /* Faz o container principal empilhar os elementos de cima para baixo,
+     em vez de deixar o tabuleiro e a barra lateral lado a lado */
+  .game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    gap: 20px;
+  }
+
+  /* Garante que a área do tabuleiro ocupe quase toda a largura da tela do celular */
+  .board-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* O SEGREDO DO TABULEIRO RESPONSIVO */
+  #board {
+    width: 90vw;       /* Ocupa 90% da largura da tela do celular */
+    height: 90vw;      /* Mantém a altura igual à largura (quadrado perfeito) */
+    max-width: 440px;  /* Não deixa ele ficar gigante em tablets */
+    max-height: 440px;
+    touch-action: none; /* Impede que a tela balance ou dê scroll ao arrastar as peças */
+  }
+
+  /* Ajusta as casas e as peças para preencherem o novo tamanho */
+  .square {
+    width: 100% !important;
+    height: 100% !important;
+  }
+  
+  .piece {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  /* O botão de reiniciar fica com uma área de toque melhor no celular */
+  #restartButton {
+    width: 90vw;
+    max-width: 440px;
+    padding: 12px;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+
+  /* A barra lateral agora vai para baixo do tabuleiro */
+  .sidebar {
+    width: 90vw;
+    max-width: 440px;
+    margin: 0 auto;
+    box-shadow: none; /* Remove sombras pesadas se houver */
+  }
+  
+  .move-history {
+    max-height: 150px; /* Limita a altura do histórico para não esticar muito a tela */
+    overflow-y: auto;
+  }
+}
